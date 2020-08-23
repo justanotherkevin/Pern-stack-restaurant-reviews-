@@ -183,5 +183,16 @@ how to use morgan?
 `app.use(morgan('tiny'))` or
 `app.use(morgan('dev'))`
 
+express with postgres, `node-postgres`
+https://node-postgres.com/
+
+adding posgres into node with `yarn add pg`
+
+
+
+
+
+
+
 
 
