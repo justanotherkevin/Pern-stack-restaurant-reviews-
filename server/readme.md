@@ -166,16 +166,21 @@ how to send back a *satus code* with express?
 `app.get('/someroute', (req, res) => { res.status(404) })`
 
 
-express middleware?
+how to use call express middleware
 ```
 app.use( (req,res,next) => {
   console.log('hi from middleware')
   next();
 })
 ```
+how to handle post request with json body object?
+`app.use(express.json())`
+
 express route handerler?
 
+
 why is the placement(where it definded) of middlewear important?
+
 
 popular middlware. morgan `yarn add morgan`
 
