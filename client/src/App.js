@@ -1,26 +1,30 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import 'semantic-ui-css/semantic.min.css'
+import {
+  BrowserRouter as Router,
+  StaticRouter, // for server rendering
+  Route,
+  Link,
+  Switch,
+} from 'react-router-dom';
+import Home from './routes/Home';
+import Restaurantsingle from './routes/RestaurantSingle';
+import Restaurantupdate from './routes/RestaurantUpdate';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/restaurant/1" component={Restaurantsingle} />
+        <Route exact path="/update/1" component={Restaurantupdate} />
+      </Switch>
+    </Router>
   );
 }
 
 export default App;
+
+
