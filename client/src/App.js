@@ -12,16 +12,19 @@ import {
 import Home from './routes/Home';
 import Restaurantsingle from './routes/RestaurantSingle';
 import Restaurantupdate from './routes/RestaurantUpdate';
+import {RestaurantcontextProvider} from './context/RestaurantContext';
 
-function App() {
+const App = () => {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/restaurant/1" component={Restaurantsingle} />
-        <Route exact path="/update/1" component={Restaurantupdate} />
-      </Switch>
+    <RestaurantcontextProvider>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/restaurant/1" component={Restaurantsingle} />
+          <Route exact path="/update/1" component={Restaurantupdate} />
+        </Switch>
     </Router>
+    </RestaurantcontextProvider>
   );
 }
 
