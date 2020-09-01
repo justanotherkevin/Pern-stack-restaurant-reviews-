@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const morgan = require("morgan");
 const { request } = require('express');
@@ -8,6 +9,7 @@ const { request } = require('express');
 const db = require("./db")
 const restaurantController = require('./controllers/restaurantsController');
 
+app.use(cors())
 app.use(morgan('dev'))
 app.use(express.json());
 
