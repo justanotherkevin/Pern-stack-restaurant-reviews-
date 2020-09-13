@@ -19,10 +19,6 @@ app.post(   "/api/v1/restaurants",        restaurantController.create);
 app.put(    "/api/v1/restaurants/:id",    restaurantController.update);
 app.delete( "/api/v1/restaurants/:id",    restaurantController.delete);
 
-
-
-
-
 app.post("/api/v1/restaurants/:id/addReview", async (req, res) => {
   try {
     const newReview = await db.query(

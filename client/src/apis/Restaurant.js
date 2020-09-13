@@ -13,6 +13,19 @@ export const fetchAllRestaurants = async () => {
       count: res.data.results
     }
   } catch(err) {
+    console.log(err)
+    return err
+  }
+}
+export const createRestaurant = async reqBody => {
+  try {
+    const res = await ApiBase().post("/", reqBody)
+    return {
+      status: res.status,
+      restaurant: res.data.data.restaurant
+    }
+  } catch(err) {
+    console.log(err)
     return err
   }
 }
