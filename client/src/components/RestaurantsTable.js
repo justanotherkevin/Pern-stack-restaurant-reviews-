@@ -2,9 +2,11 @@ import React, { useEffect, useContext } from 'react'
 import { Header, Table, Rating, Checkbox, TableCell } from 'semantic-ui-react'
 import { fetchAllRestaurants } from '../apis/Restaurant'
 import { RestaurantContext } from '../context/RestaurantContext'
+import { useHistory } from 'react-router-dom'
 
 export default function RestaurantsTable(props) {
   const {restaurants, setRestaurants} = useContext(RestaurantContext)
+  let history = useHistory()
   useEffect(()=> {
     fetchAllRestaurants().then( data => {
       setRestaurants(data.restaurants)
@@ -25,9 +27,11 @@ export default function RestaurantsTable(props) {
       })}
     </Table.Row>
   )
-
+  const onRowClicked = id => {
+    history.push(`/restaurant/${id}`)
+  }
   const tableBody = restaurants.map( (resaurant,index) => (
-    <Table.Row key={`res_${index}_row`}>
+    <Table.Row key={`res_${index}_row`} onClick={() => onRowClicked(resaurant['id'])} className="pointer">
       {restaurantkeys.map( (key,index) => {
         const componentKey = `res_${key}_${index}_cell`
         let cellBody = resaurant[key]
@@ -41,7 +45,7 @@ export default function RestaurantsTable(props) {
   ))
   return (
     restaurants.length > 0 ?
-      <Table celled padded>
+      <Table celled padded selectable>
         <Table.Header>{ tableHeader }</Table.Header>
         <Table.Body>{ tableBody }</Table.Body>
       </Table> :

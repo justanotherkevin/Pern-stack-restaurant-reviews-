@@ -29,3 +29,15 @@ export const createRestaurant = async reqBody => {
     return err
   }
 }
+export const getRestaurant = async (id) => {
+  try {
+    const res = await ApiBase().get(`/${id}`)
+    return {
+      status: res.status,
+      restaurant: res.data.data.restaurant,
+    }
+  } catch(err) {
+    console.log(err)
+    return err
+  }
+}

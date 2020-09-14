@@ -20,8 +20,8 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/restaurant/1" component={Restaurantsingle} />
-          <Route exact path="/update/1" component={Restaurantupdate} />
+          <Route exact path="/restaurant/:id" component={Restaurantsingle} />
+          <Route exact path="/restaurant/:id/update/" component={Restaurantupdate} />
         </Switch>
     </Router>
     </RestaurantcontextProvider>
