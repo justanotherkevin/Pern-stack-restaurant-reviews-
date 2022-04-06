@@ -181,6 +181,7 @@ express route handerler?
 
 why is the placement(where it definded) of middlewear important?
 
+link to morgan. https://expressjs.com/en/resources/middleware/morgan.html
 
 popular middlware. morgan `yarn add morgan`
 

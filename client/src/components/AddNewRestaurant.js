@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react'
-import { Form, Input, Button, Select } from 'semantic-ui-react'
-import { createRestaurant } from '../apis/Restaurant'
-import { RestaurantContext } from '../context/RestaurantContext'
+import React, { useState, useContext } from 'react';
+import { Form, Input, Button, Select } from 'semantic-ui-react';
+import { createRestaurant } from '../apis/Restaurant';
+import { RestaurantContext } from '../context/RestaurantContext';
 
 export default function Addnewrestaurant() {
   const genderOptions = [
@@ -10,23 +10,25 @@ export default function Addnewrestaurant() {
     { key: '3', text: '$$$', value: 3 },
     { key: '4', text: '$$$$', value: 4 },
     { key: '5', text: '$$$$$', value: 5 },
-  ]
-  const [name, setName] = useState("")
-  const [location, setLocation] = useState("")
-  const [priceRange, setPriceRange] = useState("")
-  const {addRestaurant} = useContext(RestaurantContext);
+  ];
+  const [name, setName] = useState('');
+  const [location, setLocation] = useState('');
+  const [priceRange, setPriceRange] = useState('');
+  const { addRestaurant } = useContext(RestaurantContext);
   const handleSubmmit = (event) => {
     event.preventDefault();
-    if (!name && !location && !priceRange) return
+    if (!name && !location && !priceRange)
+      throw new Error('Please fill in all the fields');
+
     const formBody = {
       name,
       location,
-      price_range: priceRange
-    }
-    createRestaurant(formBody).then( data => {
-      addRestaurant(data.restaurant)
-    })
-  }
+      price_range: priceRange,
+    };
+    createRestaurant(formBody).then((data) => {
+      addRestaurant(data.restaurant);
+    });
+  };
 
   return (
     <Form onSubmit={handleSubmmit}>
@@ -34,11 +36,11 @@ export default function Addnewrestaurant() {
         <Form.Field
           id='form-input-control-name'
           control={Input}
-          label="Name"
+          label='Name'
           placeholder='Name'
           required
           value={name}
-          onChange={ e => setName(e.target.value) }
+          onChange={(e) => setName(e.target.value)}
         />
         <Form.Field
           id='form-input-control-location'
@@ -47,19 +49,21 @@ export default function Addnewrestaurant() {
           placeholder='Location'
           value={location}
           required
-          onChange={ e => setLocation(e.target.value) }
+          onChange={(e) => setLocation(e.target.value)}
         />
         <Form.Field
           control={Select}
           options={genderOptions}
-          label={{ children: 'Gender', htmlFor: 'form-select-control-gender' }}
-          placeholder='Gender'
+          label={{ children: 'Price', htmlFor: 'form-select-control-price' }}
+          placeholder='Price'
           search
-          searchInput={{ id: 'form-select-control-gender' }}
-          onChange={ (e,data) => {setPriceRange(data.value)} }
+          searchInput={{ id: 'form-select-control-price' }}
+          onChange={(e, data) => {
+            setPriceRange(data.value);
+          }}
         />
       </Form.Group>
       <Button type='submit'>Submit</Button>
     </Form>
-  )
+  );
 }
