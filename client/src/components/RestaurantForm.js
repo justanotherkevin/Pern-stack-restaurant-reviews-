@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Select } from 'semantic-ui-react';
-import { updateRestaurant } from '../apis/Restaurant';
 import { useParams } from 'react-router-dom';
 
 const priceOptions = [
@@ -12,26 +11,22 @@ const priceOptions = [
 ];
 
 export default function RestaurantForm(props) {
-  const { id } = useParams();
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
   const [price, setPrice] = useState('');
 
   const handleSubmmit = (event) => {
     event.preventDefault();
+    if (!props.onUpdate) {
+      throw new Error('onUpdate prop is required for restaurant update');
+    }
     if (!name && !location && !price)
       throw new Error('Please fill in all the fields');
 
-    const formBody = {
-      id,
+    props.onUpdate({
       name,
       location,
       price_range: price,
-    };
-
-    updateRestaurant(formBody).then((data) => {
-      console.log(data);
-      // addRestaurant(data.restaurant);
     });
   };
   useEffect(() => {

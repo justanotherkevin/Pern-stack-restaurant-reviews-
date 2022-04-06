@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from 'semantic-ui-react';
-import { getRestaurant } from '../apis/Restaurant';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { getRestaurant, updateRestaurant } from '../apis/Restaurant';
 import CardRestaurant from '../components/CardRestaurant';
 import RestaurantForm from '../components/RestaurantForm';
 
@@ -20,6 +19,18 @@ export default function Restaurantsingle() {
       setPriceRange(restaurant.price_range);
     });
   }, [id]);
+  const onRestaurantUpdate = (restaurantData) => {
+    const formBody = { ...restaurantData, id };
+
+    updateRestaurant(formBody).then((data) => {
+      if (data.status === 200) {
+        const { name, location, price_range } = data.restaurant;
+        setName(name);
+        setLocation(location);
+        setPriceRange(price_range);
+      }
+    });
+  };
 
   return (
     <Container>
@@ -31,7 +42,12 @@ export default function Restaurantsingle() {
           price={priceRange}
         />
       )}
-      <RestaurantForm name={name} location={location} price={priceRange} />
+      <RestaurantForm
+        name={name}
+        location={location}
+        price={priceRange}
+        onUpdate={onRestaurantUpdate}
+      />
     </Container>
   );
 }
