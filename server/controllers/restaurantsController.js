@@ -81,7 +81,7 @@ exports.update = async function (req, res) {
     res.status(200).json({
       status: 'succes',
       data: {
-        retaurant: results.rows[0],
+        restaurant: results.rows[0],
       },
     });
   } catch (err) {
