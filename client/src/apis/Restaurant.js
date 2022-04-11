@@ -54,3 +54,14 @@ export const updateRestaurant = async (reqBody) => {
     return err;
   }
 };
+export const deleteRestaurant = async (id) => {
+  try {
+    const res = await ApiBase().delete(`/${id}`);
+    return {
+      status: res.status,
+    };
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
